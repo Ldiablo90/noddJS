@@ -8,3 +8,31 @@ export const getPosts = async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const createPost = (post) => async (dispatch) =>{
+    try {
+        const { data } = await api.createPost(post);
+
+        dispatch({type: 'CREATE', payload: data });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const updatePost = (id, post) => async (dispatch) =>{
+    try {
+        const { data } = await api.updatePost(id, post);
+        dispatch({ type:'UPDATE', payload: data })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const deletePost = (id) => async (dispatch) =>{
+    try {
+        const response = await api.deletePost(id);
+        dispatch({ type: 'DELETE', payload: id})
+    } catch (err) {
+        console.log(err);
+    }
+}
